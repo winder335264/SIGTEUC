@@ -476,6 +476,7 @@ import VueGoogleAutocomplete from 'vue-google-autocomplete'
                       }
                       
                     console.log(this.paradasCercanas)
+                    this.drawer=false;
             }
             }).catch((error)=>{
             console.log(error);
@@ -486,7 +487,7 @@ import VueGoogleAutocomplete from 'vue-google-autocomplete'
         error(err) {
          console.warn('ERROR(' + err.code + '): ' + err.message);
          this.snackbar=trueM
-         this.text='Navegador no compatible'
+         this.text='navegador no compatible';
       },
         //BUSCAR PARADAS MAS CERCANA INTRODUCIENDO DIRECCCION 
         getParadasCercanasDireccion(aux){
@@ -501,8 +502,8 @@ import VueGoogleAutocomplete from 'vue-google-autocomplete'
         this.bandBuscador=false;
         this.bandInfoRuta=false;
         this.bandHorario=true;
-
-        
+        this.drawer=false;
+         window.scrollTo(0,0);
         }else{
           
           if(aux==3){ //PARA GENERAR PARADAS CERCADA USANDO LA GEOLOCALIZACION
@@ -600,7 +601,7 @@ import VueGoogleAutocomplete from 'vue-google-autocomplete'
       },
         //FUNCION QUE GENERA LAS MARCAS DE LAS PARADAS DE CADA MUNICIPIO
         generarParadasMunicipio(index){
-        
+        this.drawer=false;
             this.reset();
             this.band=true;
             this.bandInfoRuta=true;
@@ -614,13 +615,23 @@ import VueGoogleAutocomplete from 'vue-google-autocomplete'
 
             axios.get('api/paradasByrutaId/'+index).then((response)=>{
                 this.paradas=response.data.data;
+                console.log(this.paradas);
                 this.markers=[];
-            
+            for(i=0;i<this.paradas.length;i++){
+                  var position={position:{lat: '', lng: ''},nombre:""};
+                  position.position.lat=this.paradas[i].latitud;
+                  position.position.lng=this.paradas[i].longitud;
+                  position.nombre=this.paradas[i].nombre;
+                  this.markers.push(position);
+                
+                 
+                }
                   axios.get('api/rutas/'+index).then((response)=>{
                       this.info=response.data.data;
                       this.center.lat=this.info.latitud;
                       this.center.lgn=this.info.longitud;
                       this.zoom=12;
+                      this.drawer=false;
                   }).catch((error)=>{
                       console.log(error);
                   });
@@ -639,6 +650,7 @@ import VueGoogleAutocomplete from 'vue-google-autocomplete'
                 this.paradas=[],
                 this.msg="Horario de "+nombre;
                 this.nombre=nombre;
+                this.drawer=false;
             }).catch((error)=>{
               console.log(error)
             });
@@ -664,6 +676,7 @@ import VueGoogleAutocomplete from 'vue-google-autocomplete'
                   this.center={lat: 10.2753418, lng: -68.007531};
                  
                 }
+                this.drawer=false;
             }).catch((error)=>{
               console.log(error)
             });
