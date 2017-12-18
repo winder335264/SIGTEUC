@@ -11,7 +11,7 @@
     @foreach($horarioUcMs as $horarioUcM)
         <tr>
             <td>{!! $horarioUcM->idRuta !!}</td>
-            <td>{!! $horarioUcM->horas !!}</td>
+            <td>{!! $horarioUcM->Horas !!}</td>
             <td>{!! $horarioUcM->bus !!}</td>
             <td>
                 {!! Form::open(['route' => ['horarioUcMs.destroy', $horarioUcM->id], 'method' => 'delete']) !!}

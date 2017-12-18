@@ -173,7 +173,8 @@ return [
 Laracasts\Flash\FlashServiceProvider::class,
 Prettus\Repository\Providers\RepositoryServiceProvider::class,
 \InfyOm\Generator\InfyOmGeneratorServiceProvider::class,
-\InfyOm\AdminLTETemplates\AdminLTETemplatesServiceProvider::class, 
+\InfyOm\AdminLTETemplates\AdminLTETemplatesServiceProvider::class,
+
         /*
          * Application Service Providers...
          */
@@ -182,6 +183,9 @@ Prettus\Repository\Providers\RepositoryServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+     
+
+
         
 
     ],

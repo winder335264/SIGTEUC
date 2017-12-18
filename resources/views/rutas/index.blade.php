@@ -18,6 +18,9 @@
                     @include('rutas.table')
             </div>
         </div>
+        <div class="text-center">
+        {{$rutas->links()}}
+        </div>
     </div>
 @endsection
 

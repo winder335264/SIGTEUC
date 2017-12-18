@@ -53,7 +53,7 @@ class parada extends Model
      * @var array
      */
     public static $rules = [
-        'latitud' => 'longitud double string'
+       
     ];
 
     

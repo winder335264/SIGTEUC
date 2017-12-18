@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 use Flash;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
-
+use Illuminate\Support\Facades\DB;
 class horarioUcMController extends AppBaseController
 {
     /** @var  horarioUcMRepository */
@@ -30,7 +30,7 @@ class horarioUcMController extends AppBaseController
     public function index(Request $request)
     {
         $this->horarioUcMRepository->pushCriteria(new RequestCriteria($request));
-        $horarioUcMs = $this->horarioUcMRepository->all();
+        $horarioUcMs = $this->horarioUcMRepository->paginate(15);
 
         return view('horario_uc_ms.index')
             ->with('horarioUcMs', $horarioUcMs);
@@ -57,7 +57,7 @@ class horarioUcMController extends AppBaseController
     {
         $input = $request->all();
 
-        $horarioUcM = $this->horarioUcMRepository->create($input);
+        $horarioUcM = db::table('HORARIO_UC_M')->insert(['idRuta'=>$request->input('idRuta'),'Horas'=>$request->input('Horas'),'bus'=>$request->input('bus')]);
 
         Flash::success('Horario Uc M saved successfully.');
 
@@ -73,7 +73,7 @@ class horarioUcMController extends AppBaseController
      */
     public function show($id)
     {
-        $horarioUcM = $this->horarioUcMRepository->findWithoutFail($id);
+        $horarioUcM = db::table('HORARIO_UC_M')->where('id',$id)->get();
 
         if (empty($horarioUcM)) {
             Flash::error('Horario Uc M not found');
@@ -81,7 +81,7 @@ class horarioUcMController extends AppBaseController
             return redirect(route('horarioUcMs.index'));
         }
 
-        return view('horario_uc_ms.show')->with('horarioUcM', $horarioUcM);
+        return view('horario_uc_ms.show')->with('horarioUcM', $horarioUcM->all());
     }
 
     /**
@@ -93,7 +93,7 @@ class horarioUcMController extends AppBaseController
      */
     public function edit($id)
     {
-        $horarioUcM = $this->horarioUcMRepository->findWithoutFail($id);
+        $horarioUcM = db::table('HORARIO_UC_M')->where('id',$id)->get();
 
         if (empty($horarioUcM)) {
             Flash::error('Horario Uc M not found');
@@ -101,7 +101,7 @@ class horarioUcMController extends AppBaseController
             return redirect(route('horarioUcMs.index'));
         }
 
-        return view('horario_uc_ms.edit')->with('horarioUcM', $horarioUcM);
+        return view('horario_uc_ms.edit')->with('horarioUcM', $horarioUcM->all());
     }
 
     /**
@@ -114,7 +114,7 @@ class horarioUcMController extends AppBaseController
      */
     public function update($id, UpdatehorarioUcMRequest $request)
     {
-        $horarioUcM = $this->horarioUcMRepository->findWithoutFail($id);
+        $horarioUcM = db::table('HORARIO_UC_M')->where('id',$id)->get();
 
         if (empty($horarioUcM)) {
             Flash::error('Horario Uc M not found');
@@ -122,7 +122,7 @@ class horarioUcMController extends AppBaseController
             return redirect(route('horarioUcMs.index'));
         }
 
-        $horarioUcM = $this->horarioUcMRepository->update($request->all(), $id);
+         db::table('HORARIO_UC_M')->where('id',$id)->update(['Horas'=>$request->input('Horas'),'bus'=>$request->input('bus')]);
 
         Flash::success('Horario Uc M updated successfully.');
 
@@ -138,7 +138,7 @@ class horarioUcMController extends AppBaseController
      */
     public function destroy($id)
     {
-        $horarioUcM = $this->horarioUcMRepository->findWithoutFail($id);
+        $horarioUcM = db::table('HORARIO_UC_M')->where('id',$id)->get();
 
         if (empty($horarioUcM)) {
             Flash::error('Horario Uc M not found');
@@ -146,7 +146,7 @@ class horarioUcMController extends AppBaseController
             return redirect(route('horarioUcMs.index'));
         }
 
-        $this->horarioUcMRepository->delete($id);
+       $horarioUcM = db::table('HORARIO_UC_M')->where('id',$id)->delete();
 
         Flash::success('Horario Uc M deleted successfully.');
 

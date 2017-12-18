@@ -11,18 +11,17 @@
       v-model="drawer"
       app
      
+     
     >
     <!--MENU LATERAL-->
       <v-list  dense>
-        <v-subheader class="mt-3 black--text ">Explora SIGTEUC<v-icon >navigate_next</v-icon><v-icon>navigate_next</v-icon><v-icon>navigate_next</v-icon></v-subheader>
+        <v-subheader class="mt-3 black--text ">Explora SITEUC<v-icon >navigate_next</v-icon><v-icon>navigate_next</v-icon><v-icon>navigate_next</v-icon></v-subheader>
         
             <!--BOTON GENERAR PARADAS DE LA UC-->
          <v-list-group v-for="item in items3" :value="item.active" v-bind:key="item.title">
              <v-list-tile slot="item" @click="getParadasUc">
-                
                   <img src="paraMenu24.png">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                   {{ item.action }}
-                
                 <v-list-tile-content>
                   <v-list-tile-title>{{ item.text }}</v-list-tile-title>
                 </v-list-tile-content>
@@ -30,9 +29,7 @@
         </v-list-group>
         
             <!--BOTON PARADAS-->
-
          <v-list-group v-for="item in items2" :value="item.active" v-bind:key="item.title">
-           
              <v-list-tile slot="item" @click="">
               <img src="busMenu.png">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                   {{ item.action }}
@@ -43,7 +40,6 @@
                 <v-icon>keyboard_arrow_down</v-icon>
               </v-list-tile-action>
             </v-list-tile>
-            
             <v-list-tile v-for="index in item.items" v-bind:key="index.nombre" @click="">
               <v-list-tile-content>
                 <v-list-tile-title v-on:click="generarParadasMunicipio(index.id)">{{ index.nombre }}</v-list-tile-title>
@@ -52,13 +48,11 @@
                 <v-icon x-large >{{ index.action }}</v-icon>
               </v-list-tile-action>
             </v-list-tile>
-            
         </v-list-group>
         
         
             <!--BOTON  HORARIOS-->
         <v-list-group v-for="item in items" :value="item.active" v-bind:key="item.title">
-          
              <v-list-tile slot="item" @click="">
                  <img src="relojMenu.png">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                   {{ item.action }}
@@ -69,7 +63,6 @@
                   <v-icon>keyboard_arrow_down</v-icon>
                 </v-list-tile-action>
             </v-list-tile>
-            
             <v-list-tile v-for="index in item.items" v-bind:key="index.nombre" @click="">
               <v-list-tile-content>
                 <v-list-tile-title v-on:click="getHorarios(index.id,index.nombre)">{{ index.nombre }}</v-list-tile-title>
@@ -78,7 +71,6 @@
                 <v-icon x-large >{{ index.action }}</v-icon>
               </v-list-tile-action>
             </v-list-tile>
-            
         </v-list-group>
         
         <!--BOTON  PARADAS CERCANAS A UNA DIRECCION-->
@@ -102,19 +94,17 @@
               </v-list-tile-content>
             </v-list-tile>
         </v-list-group>
-        
       </v-list>
-      
     </v-navigation-drawer>
     
     
     <!--BUSCADOR DE LA CABECERA-->
-    <v-toolbar color="cyan" dense fixed clipped-left app>
+    <v-toolbar color="light-blue lighten-2" dense fixed clipped-left app>
       
         <v-toolbar-title  style="width: 300px" class="ml-0 pl-3">
           <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
           <v-btn  flat v-on:click="reset" class="dark--text">   <img src="mundial.png">&nbsp;&nbsp;
-          <b1>SIGTEUC</b1></v-btn>
+          <b1>SITEUC</b1></v-btn>
         </v-toolbar-title>
         
         <v-layout row align-center  class="white--text">
@@ -161,6 +151,7 @@
               <v-flex  >
                 <v-card  v-if = "bandBuscador==false" color="grey lighten-2" class="black--text" >
                   <v-card-title >  
+                    <!--Buscador de paradas cercanas introducciendo direccion-->
                   <img src="panel.png">&nbsp;&nbsp;&nbsp;
                    <v-subheader><b1>Dirección:</b1></v-subheader> 
                      <v-text-field  
@@ -229,7 +220,7 @@
                   </v-flex>
 
                   <v-flex  xs6 sm class="black--text " v-if="paradas.length>0 && ban==false && bandGeo ==false">
-                      <inforuta img="viajes.jpg" title="Viajes" :msg="info.cantidad_viaje"></inforuta>
+                      <inforuta img="busViaje.jpg" title="Viajes" :msg="info.cantidad_viaje"></inforuta>
                   </v-flex>
                   
                   <v-flex xs6 sm class="black--text  " v-if="paradas.length>0 && ban==false && bandGeo ==false">
@@ -277,11 +268,8 @@
                   <horarios :nombre="nombre" :headers="headers1" :items="h_uc_m"></horarios>
               </v-flex>
               
-              
             </v-layout>
          </v-container>
-         
-         
       </v-content>
     </main>
   </v-app>
@@ -299,6 +287,7 @@ const rows = []
     })
   }
 
+//Importamos los paquetes que hacemos uso
 import * as VueGoogleMaps from 'vue2-google-maps';
 import Autocomplete from 'vue2-autocomplete-js';
 import VueGoogleAutocomplete from 'vue-google-autocomplete'
@@ -308,8 +297,6 @@ import VueGoogleAutocomplete from 'vue-google-autocomplete'
     data: () => ({
       
         rows,
-        drawer: true,
-        
         zoom:10,
         info:'',
         h_m_uc:'',
@@ -319,8 +306,9 @@ import VueGoogleAutocomplete from 'vue-google-autocomplete'
         searchPlace:'',
         BuscarRuta: '',
         BuscarParadaDireccion:'',
-        verdadero:true,
         
+        verdadero:true,
+        drawer: true,
         band:true,
         ban:true,
         bandGeo: true,
@@ -328,14 +316,12 @@ import VueGoogleAutocomplete from 'vue-google-autocomplete'
         bandBuscador:true,
         bandInfoRuta:true,
         bandHorario: true,
-        
         snackbar: false,
+        
         color: 'red',
         mode: '',
         timeout: 4000,
         text: 'Nombre de la Ruta no encontrada',
-        
-       
         
         rutas:[],
         markers:[],
@@ -400,6 +386,7 @@ import VueGoogleAutocomplete from 'vue-google-autocomplete'
         });
     },
 
+  //ECLARACION DE LOS METODOS UTILIZADOS
     methods:{
      
         //FUNCION PARA BUSCAR UNA RUTA MOSTRANDO TODA SU INFORMACION
@@ -422,7 +409,7 @@ import VueGoogleAutocomplete from 'vue-google-autocomplete'
                console.log(error);
             });
       },
-        // GEOLOCALIZACION --- PARADAS MAS CERCANAS A MI UBICACION
+        // Funcion que se le pasa a la funcion  navigator.geolocation.getCurrentPosition para obtener las paradas cercanas
         success(pos) {
             var crd = pos.coords;
             var i,W;
@@ -442,6 +429,7 @@ import VueGoogleAutocomplete from 'vue-google-autocomplete'
                             result.position.lat=response.data.data[i].latitud;
                             result.position.lng=response.data.data[i].longitud;
                             
+                            //FUNCION DE HARVESINE (DISTANCIA ENTRE 2 PUNTOS EN UNA ESFERA)
                             var R = 6371; // RADIO DE LA TIERRA EN KM 
                             var dLat = ((result.position.lat-this.currentLocation.lat)* Math.PI / 180);  //SE CAMBIA A RADIANES
                             var dLon = ((result.position.lng-this.currentLocation.lng)* Math.PI / 180);  
@@ -451,18 +439,18 @@ import VueGoogleAutocomplete from 'vue-google-autocomplete'
                             var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
                             var d = R * c; 
                             result.result=d;
-                            
                             result.nombre=response.data.data[i].nombre;
                             result.id=response.data.data[i].idRuta;
                             this.distancia.push(result);
                       
                       }
-                      
+                      //ORDENAMOS EL VECTOR DE DISTANCIA DE MENOR A MAYOR PARA LUEGO TOMAR 5 PARADAS
                       this.distancia=this.distancia.sort(function(a, b){return a.result-b.result});
                       this.paradasCercanas=[];
                       console.log(this.distancia)
                       
-                    for(W=0;W<5;W++){  //RECORRER EL VECTOR PARA LAS PRIMERAS 5 PARADAS 
+                      //RECORRER EL VECTOR PARA LAS PRIMERAS 5 PARADAS 
+                    for(W=0;W<5;W++){ 
                      
                           var position={position:{lat:  this.distancia[W].position.lat, lng: this.distancia[W].position.lng },nombre: W+1 + " -- " + this.distancia[W].nombre};
                           this.markers.push(position);
@@ -506,24 +494,21 @@ import VueGoogleAutocomplete from 'vue-google-autocomplete'
          window.scrollTo(0,0);
         }else{
           
-          if(aux==3){ //PARA GENERAR PARADAS CERCADA USANDO LA GEOLOCALIZACION
+          if(aux==3){  //OBNTENEMOS LAS 5 PARADAS CERCANAS USANDO LA GEOLOALIZACIÓN
              var options = {
                 enableHighAccuracy: true,
                 timeout: 5000,
-                maximumAge: 0
+                maximumAge: 0 };
                 
-              };
-              
-             
-              navigator.geolocation.getCurrentPosition(this.success, this.error, options); // Obteiendo la lat y log de la ubicacion
-              this.bandBuscador=true;
-              this.bandGeo=false;
-              this.ban=true;
-              this.bandInfoRuta=false;
-              this.bandHorario=true;
+                navigator.geolocation.getCurrentPosition(this.success, this.error, options); 
+                this.bandBuscador=true;
+                this.bandGeo=false;
+                this.ban=true;
+                this.bandInfoRuta=false;
+                this.bandHorario=true;
              
             
-          }else{
+          }else{   //OBNTENEMOS LAS 5 PARADAS CERCANAS DE ACUERDO A LA DIRECCION INTRODUCIDA POR EL USUARIO
            
             this.band=true;
             this.bandInfoRuta=false;
@@ -531,14 +516,13 @@ import VueGoogleAutocomplete from 'vue-google-autocomplete'
             this.bandGeo=false;
             this.bandBuscador=false;
             this.bandHorario=true;
-            
-            
             var i;
             var geocoder = new google.maps.Geocoder();
-           geocoder.geocode({'address': 'Carabobo,Venezuela'+ this.BuscarParadaDireccion}, (results, status) => {
+            //FUNCION PARA OBTENER LA LATITUD Y LONGITUD DE LA DIRECCION INTRODUCIDA
+            geocoder.geocode({'address': 'Carabobo,Venezuela'+ this.BuscarParadaDireccion}, (results, status) => {
              
               if (status === 'OK') {
-          
+                //GUARDAMOS LA LAT Y LONG
                 this.currentLocation.lat = results[0].geometry.location.lat();
                 this.currentLocation.lng = results[0].geometry.location.lng();
                 axios.get("api/paradasRutas").then((response)=>{
@@ -551,6 +535,8 @@ import VueGoogleAutocomplete from 'vue-google-autocomplete'
                     this.distancia=[];
                     this.zoom=12;
                       
+                      //CICLO PARA RECORRER TODAS LAS PARADAS OBTENIENDO LA LAT Y LONG 
+                      //PARA LUEGO CALCULAR LA DISTANCIA MINIMA CON LA FORMULA DE HARVERSINE
                       for(i=0;i<response.data.data.length;i++){
                           var result={position:{lat: '', lng: ''},nombre:"",id:"",result:""};
                           result.position.lat=response.data.data[i].latitud;
@@ -565,18 +551,17 @@ import VueGoogleAutocomplete from 'vue-google-autocomplete'
                           Math.sin(dLon/2) * Math.sin(dLon/2);  
                           var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
                           var d = R * c; 
-                          
                           result.result=d;
                           result.nombre=response.data.data[i].nombre;
                           result.id=response.data.data[i].idRuta;
                           this.distancia.push(result);
   
                       }
-                       
-                    this.distancia=this.distancia.sort(function(a, b){return a.result-b.result}) //ORDENAMOS EL VECTOR DE DISTANCIA
+                    //ORDENAMOS EL VECTOR DE DISTANCIA
+                    this.distancia=this.distancia.sort(function(a, b){return a.result-b.result})  
                     this.paradasCercanas=[];
-              
-                    for(i=0;i<5;i++){ //RECORREMOS EL VECTOR PARA IMPRIMIR  LAS PRIMERAS 5 PARADAS 
+                    //RECORREMOS EL VECTOR PARA IMPRIMIR  LAS PRIMERAS 5 PARADAS
+                    for(i=0;i<5;i++){  
                        var position={position:{lat:  this.distancia[i].position.lat, lng: this.distancia[i].position.lng },nombre: i+1 + " -- " + this.distancia[i].nombre};
                         this.markers.push(position);
                             var aux=new Object();
@@ -601,36 +586,35 @@ import VueGoogleAutocomplete from 'vue-google-autocomplete'
       },
         //FUNCION QUE GENERA LAS MARCAS DE LAS PARADAS DE CADA MUNICIPIO
         generarParadasMunicipio(index){
-        this.drawer=false;
             this.reset();
+            this.drawer=false;
             this.band=true;
             this.bandInfoRuta=true;
             this.ban=false;
             this.bandGeo=false;
             this.bandBuscador=true;
             this.bandHorario=true;
-
             var i;
-          
 
             axios.get('api/paradasByrutaId/'+index).then((response)=>{
+              
                 this.paradas=response.data.data;
                 console.log(this.paradas);
                 this.markers=[];
+             
             for(i=0;i<this.paradas.length;i++){
                   var position={position:{lat: '', lng: ''},nombre:""};
                   position.position.lat=this.paradas[i].latitud;
                   position.position.lng=this.paradas[i].longitud;
                   position.nombre=this.paradas[i].nombre;
                   this.markers.push(position);
-                
-                 
                 }
+                 
                   axios.get('api/rutas/'+index).then((response)=>{
                       this.info=response.data.data;
                       this.center.lat=this.info.latitud;
                       this.center.lgn=this.info.longitud;
-                      this.zoom=12;
+                      this.zoom=11;
                       this.drawer=false;
                   }).catch((error)=>{
                       console.log(error);
@@ -711,7 +695,7 @@ import VueGoogleAutocomplete from 'vue-google-autocomplete'
             this.distancia=[];
             this.paradasCercanas=[];
 
-            this.center={lat: 10.1111422, lng: -67.8813446},  
+            //this.center={lat: 10.1111422, lng: -67.8813446},  
             this.vecdistancia={lng:"",lat:""};
             this.currentLocation = { lat : 0, lng : 0};
 

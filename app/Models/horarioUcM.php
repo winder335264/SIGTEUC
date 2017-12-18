@@ -1,10 +1,7 @@
 <?php
-
 namespace App\Models;
-
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-
 /**
  * Class horarioUcM
  * @package App\Models
@@ -17,19 +14,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class horarioUcM extends Model
 {
     //use SoftDeletes;
-
     public $table = 'HORARIO_UC_M';
     
-
    // protected $dates = ['deleted_at'];
-
-
     public $fillable = [
         'idRuta',
         'horas',
         'bus'
     ];
-
     /**
      * The attributes that should be casted to native types.
      *
@@ -40,7 +32,6 @@ class horarioUcM extends Model
     'Horas' => 'string',
         'bus' => 'string'
     ];
-
     /**
      * Validation rules
      *
@@ -49,6 +40,4 @@ class horarioUcM extends Model
     public static $rules = [
         
     ];
-
-    
 }

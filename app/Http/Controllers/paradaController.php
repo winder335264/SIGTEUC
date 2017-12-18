@@ -10,6 +10,7 @@ use Flash;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
 use App\Http\Controllers\AppBaseController;
+use Mapper;
 class paradaController extends AppBaseController
 {
     /** @var  paradaRepository */
@@ -29,7 +30,7 @@ class paradaController extends AppBaseController
     public function index(Request $request)
     {
         $this->paradaRepository->pushCriteria(new RequestCriteria($request));
-        $paradas = $this->paradaRepository->all();
+        $paradas = $this->paradaRepository->paginate(15);
 
         return view('paradas.index')
             ->with('paradas', $paradas);
@@ -42,6 +43,7 @@ class paradaController extends AppBaseController
      */
     public function create()
     {
+         Mapper::map(10.2161604, -68.037388);
         return view('paradas.create');
     }
 

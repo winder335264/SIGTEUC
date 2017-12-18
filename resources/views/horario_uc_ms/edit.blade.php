@@ -11,7 +11,7 @@
        <div class="box box-primary">
            <div class="box-body">
                <div class="row">
-                   {!! Form::model($horarioUcM, ['route' => ['horarioUcMs.update', $horarioUcM->id], 'method' => 'patch']) !!}
+                   {!! Form::model($horarioUcM, ['route' => ['horarioUcMs.update', $horarioUcM[0]->id], 'method' => 'patch']) !!}
 
                         @include('horario_uc_ms.fields')
 

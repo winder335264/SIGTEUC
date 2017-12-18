@@ -21,6 +21,11 @@
 /**
  * rutas utilizadas 
  */
+ Route::get('/login', function () {
+	   
+    return view('auth.login');
+    
+});
  
 Route::get('/', function () {
 	   
@@ -28,13 +33,13 @@ Route::get('/', function () {
     
 });
 
-Route::get('layout', function () {
+Route::get('/siteucmyadmin', function () {
 	   
-    return view('admin.layout');
+    return view('auth.login');
     
 });
 
-
+Auth::routes();
 Route::resource('rutas', 'rutaController');
 
 Route::resource('paradas', 'paradaController');
@@ -43,4 +48,10 @@ Route::resource('paradasUcs', 'paradasUcController');
 
 Route::resource('horarioUcMs', 'horarioUcMController');
 
-Route::resource('horarioMUcs', 'horarioMUcController');
+Route::get('/home', 'HomeController@index');
+
+Route::resource('hORARIOMUCS', 'HORARIO_M_UCController');
+
+Route::resource('users', 'usersController');
+
+

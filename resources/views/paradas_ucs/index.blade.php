@@ -2,7 +2,7 @@
 
 @section('content')
     <section class="content-header">
-        <h1 class="pull-left">Paradas Ucs</h1>
+        <h1 class="pull-left">Paradas Internas</h1>
         <h1 class="pull-right">
            <a class="btn btn-primary pull-right" style="margin-top: -10px;margin-bottom: 5px" href="{!! route('paradasUcs.create') !!}">Add New</a>
         </h1>
@@ -18,6 +18,10 @@
                     @include('paradas_ucs.table')
             </div>
         </div>
+           <div class="text-center">
+        {{$paradasUcs->links()}}
+        </div>
+        
     </div>
 @endsection
 

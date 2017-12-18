@@ -5,7 +5,7 @@
           :center="center"
           :zoom="zoom"
           map-type-id="roadmap"
-          style="width: 100%; height: 700px;">
+          style="width: 100%; height: 350px;">
         
 
           <gmap-marker

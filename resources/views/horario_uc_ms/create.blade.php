@@ -14,7 +14,7 @@
                 <div class="row">
                     {!! Form::open(['route' => 'horarioUcMs.store']) !!}
 
-                        @include('horario_uc_ms.fields')
+                        @include('horario_uc_ms.createField')
 
                     {!! Form::close() !!}
                 </div>

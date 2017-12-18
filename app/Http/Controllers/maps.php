@@ -10,41 +10,9 @@ class maps extends Controller
     
     
     public function renderMap($id=0){
-       
-        if($id==0){  //PANTALLA PRINCIPAL
-        Mapper::map(10.2117472,-67.9088968);
-        $rutas=DB::table("RUTA")->select('nombre','id')->get();
-          return view('admin.dashboard')->with("rutas",$rutas)->with("info_parada",[] )->with("info_ruta",[] )->with("paradas_uc", [])->with("horario_UC_M", [])->with("horario_M_UC", [])->with("rutas1",[]);
-        }else{
-              //consultas a la BD 
-                $paradas=DB::table("PARADA")->where("idRuta",$id)->get();
-                $rutas=DB::table("RUTA")->select('nombre','id')->get();
-                $ruta_ubicacion=DB::table("RUTA")->select('latitud','longitud')->where("id", $id)->get();
-                $info_parada=DB::table("PARADA")->select('nombre','descripcion')->where("idRuta",$id)->get();
-                $info_ruta=DB::table("RUTA")->select('cantidad_parada','cantidad_viaje','distancia','duracion','nombre','descripcion')->where("id",$id)->get();
+       Mapper::map(10.2161604,-68.037388);
 
-            if($id==-1){   //PARADAS UC
-               
-               Mapper::map(10.2759776,-68.0086936, ['zoom' => 16,'center' => true]);
-                $paradas_uc=DB::table("PARADA_UC")->select('latitud','longitud','nombre', 'descripcion')->get();
-                 for ($i = 0; $i < sizeof($paradas_uc); $i++){
-                  Mapper::informationWindow($paradas_uc[$i]->latitud, $paradas_uc[$i]->longitud, $paradas_uc[$i]->nombre, ['open' => true, 'maxWidth'=> 300, 'markers' => ['title' => 'Title']]);
-                
-                }
-                return view('admin.dashboard')->with("rutas",$rutas)->with("info_parada",$info_parada )->with("info_ruta",$info_ruta )->with("paradas_uc",$paradas_uc)->with("horario_UC_M", [])->with("horario_M_UC", [])->with("rutas1",[]);
-
-            }else{ // PARADAS DE CADA MUNICIPIO
-            
-              
-                 
-                Mapper::map($ruta_ubicacion[0]->latitud, $ruta_ubicacion[0]->longitud, ['zoom' => 13,'center' => true]);
-                for ($i = 0; $i < sizeof($paradas); $i++){
-                  Mapper::informationWindow($paradas[$i]->latitud, $paradas[$i]->longitud, $info_parada[$i]->nombre, ['open' => true,  'maxWidth'=> 300, 'markers' => ['title' => 'Title']]);
-                }
-                return view('admin.dashboard')->with("rutas",$rutas)->with("info_parada", $info_parada )->with("info_ruta",$info_ruta)->with("paradas_uc",[])->with("horario_UC_M", [])->with("horario_M_UC", [])->with("rutas1",[]);
-            }
-        }
-        
+    return view('paradas.fieldsMaps');
     }
     
     

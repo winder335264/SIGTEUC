@@ -14,11 +14,14 @@
                 <div class="row">
                     {!! Form::open(['route' => 'paradas.store']) !!}
 
-                        @include('paradas.fields')
-
+                        @include('paradas.fieldsMaps')
+                 
                     {!! Form::close() !!}
                 </div>
             </div>
         </div>
+        
     </div>
+    
+    
 @endsection

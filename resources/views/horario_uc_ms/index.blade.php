@@ -2,7 +2,7 @@
 
 @section('content')
     <section class="content-header">
-        <h1 class="pull-left">Horario Uc Ms</h1>
+        <h1 class="pull-left">Horarios de la UC hacia el municipio</h1>
         <h1 class="pull-right">
            <a class="btn btn-primary pull-right" style="margin-top: -10px;margin-bottom: 5px" href="{!! route('horarioUcMs.create') !!}">Add New</a>
         </h1>
@@ -17,6 +17,9 @@
             <div class="box-body">
                     @include('horario_uc_ms.table')
             </div>
+        </div>
+         <div class="text-center">
+        {{$horarioUcMs->links()}}
         </div>
     </div>
 @endsection

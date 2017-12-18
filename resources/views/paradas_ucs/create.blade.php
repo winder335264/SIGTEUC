@@ -14,7 +14,7 @@
                 <div class="row">
                     {!! Form::open(['route' => 'paradasUcs.store']) !!}
 
-                        @include('paradas_ucs.fields')
+                        @include('paradas_ucs.fieldsMap')
 
                     {!! Form::close() !!}
                 </div>

@@ -6,7 +6,7 @@
    <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet">
    <link href='css/vuetify.min.css' rel="stylesheet">
    
-   <title>SIGTEUC</title>
+   <title>SITEUC</title>
 </head>
 <body>
   <div id="app">

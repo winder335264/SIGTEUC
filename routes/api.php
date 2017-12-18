@@ -33,3 +33,8 @@ Route::resource('horario_m_ucs', 'horarioMUcAPIController');
 Route::get('horarios/{idruta}','paradaAPIController@getHorarios');
 
 //Route::get('buscar/{string}','paradaAPIController@getHorarios');
+
+
+Route::resource('h_o_r_a_r_i_o__m__u_c_s', 'HORARIO_M_UCAPIController');
+
+Route::resource('users', 'usersAPIController');

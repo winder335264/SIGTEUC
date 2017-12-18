@@ -33,7 +33,9 @@ class ruta extends Model
         'longitud',
         'cantidad_parada',
         'cantidad_viaje',
-        'distancia'
+        'distancia',
+        'descripcion',
+        'duracion'
     ];
 
     /**
@@ -47,7 +49,8 @@ class ruta extends Model
         'longitud' => 'double',
         'cantidad_parada' => 'integer',
         'cantidad_viaje' => 'integer',
-        'distancia' => 'float'
+        'distancia' => 'string',
+        'duracion'=>'string'
     ];
 
     /**
@@ -56,7 +59,7 @@ class ruta extends Model
      * @var array
      */
     public static $rules = [
-        'distancia' => 'duracion float string'
+       
     ];
 
     

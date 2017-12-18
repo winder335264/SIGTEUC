@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Mapper;
 use App\Http\Requests\CreateparadasUcRequest;
 use App\Http\Requests\UpdateparadasUcRequest;
 use App\Repositories\paradasUcRepository;
@@ -30,8 +30,8 @@ class paradasUcController extends AppBaseController
     public function index(Request $request)
     {
         $this->paradasUcRepository->pushCriteria(new RequestCriteria($request));
-        $paradasUcs = $this->paradasUcRepository->all();
-
+        $paradasUcs = $this->paradasUcRepository->paginate();
+Mapper::map(10.2161604, -68.037388);
         return view('paradas_ucs.index')
             ->with('paradasUcs', $paradasUcs);
     }

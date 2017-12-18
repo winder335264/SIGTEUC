@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Mapper;
 use App\Http\Requests\CreaterutaRequest;
 use App\Http\Requests\UpdaterutaRequest;
 use App\Repositories\rutaRepository;
@@ -29,7 +29,7 @@ class rutaController extends AppBaseController
     public function index(Request $request)
     {
         $this->rutaRepository->pushCriteria(new RequestCriteria($request));
-        $rutas = $this->rutaRepository->all();
+        $rutas = $this->rutaRepository->paginate(15);
 
         return view('rutas.index')
             ->with('rutas', $rutas);
@@ -41,7 +41,7 @@ class rutaController extends AppBaseController
      * @return Response
      */
     public function create()
-    {
+    {Mapper::map(10.2161604, -68.037388);
         return view('rutas.create');
     }
 
@@ -55,7 +55,7 @@ class rutaController extends AppBaseController
     public function store(CreaterutaRequest $request)
     {
         $input = $request->all();
-
+        
         $ruta = $this->rutaRepository->create($input);
 
         Flash::success('Ruta saved successfully.');
